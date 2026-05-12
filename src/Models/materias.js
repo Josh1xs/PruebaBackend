@@ -9,7 +9,7 @@ import mongoose, { Schema, model } from "mongoose";
         type: mongoose.Schema.Types.ObjectId,
         ref: "maestros"
     },
-    email: {
+    isAvailable: {
         type: String
     }
 },{
