@@ -8,7 +8,7 @@ import recuperarContraseñaMaestros from "./src/Routes/recuperarContraseñaMaest
 import Materias from "./src/Routes/materias.js"
 import Tareas from "./src/Routes/tareas.js"
 import Logout from "./src/Routes/logout.js"
-
+import Categoria from "./src/Routes/categoriatarea.js"
 import cookieParser from "cookie-parser"
 
 
@@ -25,6 +25,7 @@ app.use(express.json())
 //Normales
 app.use("/api/materias", Materias)
 app.use("/api/tareas", Tareas )
+app.use("/api/categoria", Categoria)
 
 
 //Autenticacion

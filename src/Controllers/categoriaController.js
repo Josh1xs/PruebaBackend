@@ -31,7 +31,7 @@ categoriaController.insertCategoria = async(req, res) => {
         
         }
 
-        const newCategoria = new tareasModel({name, description, color, isActived})
+        const newCategoria = new categoriaModel({name, description, color, isActived})
 
         await newCategoria.save();
     
