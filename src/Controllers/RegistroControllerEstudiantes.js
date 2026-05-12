@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer" 
 import crypto from "crypto"
-import jsobwebtoken from "jsonwebtoken"
+import jsonwebtoken from "jsonwebtoken"
 import bcryptjs from "bcryptjs"
 import { config } from "../../config.js"
 import estudianteModel from "../Models/estudiantes.js"
@@ -32,7 +32,7 @@ registerEstudianteController.register = async (req, res ) => {
 
         const randomCode  = crypto.randomBytes(3).toString("hex")
 
-        const token = jsobwebtoken.sing(
+        const token = jsonwebtoken.sign(
 
             {randomCode, name, lastname, email, password: passwordHashed, birthdate, isVerified, timeOut},
 

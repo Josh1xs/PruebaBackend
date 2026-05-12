@@ -2,6 +2,9 @@ import express from "express"
 import RegistroEstudiantesRoutes from "./src/Routes/RegistroEstudiantes.js"
 import LoginEstudiantesRoutes from "./src/Routes/LoginEstudiantes.js"
 import RegistroMaestrosRoutes from "./src/Routes/RegistroMaestro.js"
+import LoginMaestroRoutes from "./src/Routes/LoginMaestros.js"
+import recuperarContraseñaEstudiantes from "./src/Routes/recuperarContraseñaEstudiantes.js"
+import recuperarContraseñaMaestros from "./src/Routes/recuperarContraseñaMaestros.js"
 import cookieParser from "cookie-parser"
 
 
@@ -14,9 +17,11 @@ app.use(cookieParser())
 app.use(express.json())
 
 
-app.use("api/registerEstudiante", RegistroEstudiantesRoutes)
-app.use("api/registerMaestro", RegistroMaestrosRoutes)
-app.use("api/login", LoginEstudiantesRoutes)
-
+app.use("/api/registerEstudiante", RegistroEstudiantesRoutes)
+app.use("/api/registerMaestro", RegistroMaestrosRoutes)
+app.use("/api/loginEstudiante", LoginEstudiantesRoutes)
+app.use("/api/loginMaestro", LoginMaestroRoutes)  
+app.use("/api/recoveryPassword", recuperarContraseñaEstudiantes)
+app.use("/api/recoveryPasswordProfesores", recuperarContraseñaMaestros)
 
 export default app;

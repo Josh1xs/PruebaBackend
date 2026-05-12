@@ -1,7 +1,7 @@
 import jsonwebtoken from "jsonwebtoken"
 import bcryptjs from "bcryptjs"
 import { config } from "../../config.js"
-import estudiantesModel from "../Models/profesores.js"
+import maestrosModel from "../Models/profesores.js"
 import { json } from "express"
 
 const loginMaestrosController = {}
@@ -13,23 +13,23 @@ loginMaestrosController.login = async(req,res) => {
 
 
         //Verificamos que el correo exista 
-        const  maestroFound = await estudiantesModel.findOne({email})
+        const  maestroFound = await maestrosModel.findOne({email})
 
         //Si no existe el correo 
         if(!maestroFound){
             return res.status(400).json({message: "El estudiante no existe"})
         }
 
-        if(maestroFound.timeOut && estudianteFound.timeOut > Date.now()){
+        if(maestroFound.timeOut && maestroFound.timeOut > Date.now()){
             return res.status(403).json({message: "Cuenta bloqueada"})
         }
 
 
-        const isMatch = await bcryptjs.compare(password, estudianteFound.password)
+        const isMatch = await bcryptjs.compare(password, maestroFound.password)
 
 
         if(!isMatch){
-            estudianteFound.loginAttemps = (estudianteFound.loginAttemps || 0) + 1
+            maestroFound.loginAttemps = (maestroFound.loginAttemps || 0) + 1
 
                     return res.status(401).json({message: "Contraseña incorrecta "})
         }
@@ -53,7 +53,7 @@ loginMaestrosController.login = async(req,res) => {
 
         //Generamos nuestro token
         const token = jsonwebtoken.sign (
-            {id: maestroFound._id, userType: "estudiante"},
+            {id: maestroFound._id, userType: "maestro"},
 
             config.JWT.secret,
             {expiresIn: "30d"}

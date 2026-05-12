@@ -23,16 +23,14 @@ registerMaestroController.register = async (req, res ) => {
         if (existMaestro) {
             return res.status(400).json({message: "El estudiante ya existe"})
         }
-
-
         //Encriptamos la contraseña
 
         const passwordHashed = await bcryptjs.hash(password,10)
 
-
+  
         const randomCode  = crypto.randomBytes(3).toString("hex")
 
-        const token = jsonwebtoken.sing(
+        const token = jsonwebtoken.sign(
 
             {randomCode, name, lastname, email, phone, speciality, isActive, password: passwordHashed,  isVerified, timeOut},
 
@@ -42,6 +40,7 @@ registerMaestroController.register = async (req, res ) => {
             {expiresIn: "17m"}
 
         )
+      
 
         res.cookie("registrationCookie", token, {maxAge: 17 * 60 * 1000})
 
